@@ -582,6 +582,7 @@
         .tour-dates { text-align: center; font-weight: 600; color: var(--text-dark); }
         .tour-dates p { margin: 0.25rem 0; }
         :root { --tour-card-w: 300px; --tour-gap: 0.75rem; }
+        .tour-note { text-align: center; color: var(--text-light); font-size: 1rem; margin-top: 0.5rem; margin-bottom: 1.25rem; font-style: italic; }
         /* Use a 3-column grid to match the regular rates layout */
         .tour-rates, .tour-addons {
             display: grid;
@@ -602,10 +603,8 @@
             border: 1px solid rgba(20,80,120,0.04);
             background: var(--bg-light);
             box-shadow: 0 6px 18px rgba(16,40,60,0.04);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 160px;
+            display: block;
+            min-height: auto;
         }
 
         @media (max-width: 1024px) {
@@ -893,6 +892,7 @@
     <section id="tour">
         <div class="container">
             <h2>Tour</h2>
+            <p class="tour-note">While I’m on tour in January, I am offering special, reduced rates, see the Tour Rates below for limited-time pricing.</p>
             <div class="tour-dates">
                 <p>Memphis, TN — 1/6</p>
                 <p>Atlanta, GA — 1/7</p>
@@ -916,9 +916,9 @@
             </div>
 
             <div class="tour-addons">
-                <div class="addon-card"><h3>Add Multipop</h3><div class="price">+$100</div></div>
                 <div class="addon-card"><h3>Add Greek</h3><div class="price">+$100</div></div>
                 <div class="addon-item"><div class="addon-card"><h3>Add on Travel</h3><div class="price">+$1 per mile</div><p>Travel expenses are calculated based on the distance from your location to mine.</p></div></div>
+                <div class="addon-card"><h3>Add Fetish</h3><div class="price">Ask about your request and we will discuss rates.</div></div>
             </div>
         </div>
     </section>
@@ -957,9 +957,9 @@
                 <button class="carousel-btn prev addons-prev" aria-label="Previous">‹</button>
                 <button class="carousel-btn next addons-next" aria-label="Next">›</button>
                 <div class="addons-track" id="addonsTrack">
-                    <div class="addon-item"><div class="addon-card"><h3>Add on Multiple Pops</h3><div class="price">+$100</div></div></div>
                     <div class="addon-item"><div class="addon-card"><h3>Add on Greek</h3><div class="price">+$100</div></div></div>
                     <div class="addon-item"><div class="addon-card"><h3>Add on Travel</h3><div class="price">+$1 per mile</div><p>Travel expenses are calculated based on the distance from your location to mine.</p></div></div>
+                <div class="addon-card"><h3>Add Fetish</h3><div class="price">Ask about your request and we will discuss rates.</div></div>
                 </div>
                 <div class="carousel-dots" id="addonsDots"></div>
             </div>
