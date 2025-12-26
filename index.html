@@ -331,7 +331,7 @@
             font-weight: bold;
             color: var(--accent-color);
             margin: 1rem 0;
-            text-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+            text-shadow: 0 0 15px rgba(102, 116, 240, 0.6);
         }
 
         .service-card ul {
@@ -382,6 +382,15 @@
             border-radius: 12px;
             border: 1px solid rgba(20,80,120,0.04);
             box-shadow: 0 6px 22px rgba(16,40,60,0.04), 0 0 14px rgba(135,206,235,0.04);
+        }
+
+        /* Restore glowing price style for rate/addon cards to match theme */
+        .rate-card .price, .addon-card .price {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--gold-500);
+            margin: 0.75rem 0;
+            text-shadow: 0 0 14px rgba(212,175,55,0.45);
         }
 
         .rates-carousel .carousel-btn, .addons-carousel .carousel-btn {
@@ -918,7 +927,7 @@
             <div class="tour-addons">
                 <div class="addon-card"><h3>Add Greek</h3><div class="price">+$100</div></div>
                 <div class="addon-item"><div class="addon-card"><h3>Add on Travel</h3><div class="price">+$1 per mile</div><p>Travel expenses are calculated based on the distance from your location to mine.</p></div></div>
-                <div class="addon-card"><h3>Add Fetish</h3><div class="price">Ask about your request and we will discuss rates.</div></div>
+                <div class="addon-card"><h3>Add Fetish</h3><div class="price">$TBD</div><p>Ask about your request and we will discuss rates.</p></div>
             </div>
         </div>
     </section>
@@ -959,7 +968,7 @@
                 <div class="addons-track" id="addonsTrack">
                     <div class="addon-item"><div class="addon-card"><h3>Add on Greek</h3><div class="price">+$100</div></div></div>
                     <div class="addon-item"><div class="addon-card"><h3>Add on Travel</h3><div class="price">+$1 per mile</div><p>Travel expenses are calculated based on the distance from your location to mine.</p></div></div>
-                <div class="addon-card"><h3>Add Fetish</h3><div class="price">Ask about your request and we will discuss rates.</div></div>
+                    <div class="addon-item"><div class="addon-card"><h3>Add Fetish</h3><div class="price">$TBD</div><p>Ask about your request and we will discuss rates.</p></div></div>
                 </div>
                 <div class="carousel-dots" id="addonsDots"></div>
             </div>
