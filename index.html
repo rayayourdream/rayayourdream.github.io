@@ -35,7 +35,7 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            color: var(--text-dark);
+            color: var(--navy);
             background: var(--bg-dark);
             overflow-x: hidden;
         }
@@ -158,11 +158,132 @@
             color: var(--navy);
             text-shadow: 0 0 12px rgba(1,42,68,0.08);
         }
+
+        /* Header boxes for visibility on image backgrounds */
+        /* Clear any standalone h2 boxes so the .section-title-box provides the translucent panel */
+        #tour h2, #social h2, #gifts h2 {
+            display: inline-block;
+            background: transparent;
+            color: var(--navy);
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+            position: relative;
+            z-index: 6;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            #tour h2, #social h2, #gifts h2 { display: block; width: auto; padding: 0; margin: 0; }
+        }
+
+        /* Reusable centered title box used for section headers and tour meta */
+        .section-title-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.20); /* translucent like rate/social panels */
+            padding: 0.6rem 1.25rem;
+            border-radius: 12px;
+            margin: 0 auto 1rem;
+            box-shadow: 0 6px 22px rgba(16,40,60,0.04);
+            border: 1px solid rgba(20,80,120,0.04);
+            backdrop-filter: blur(6px) saturate(1.02);
+            max-width: min(920px, 95%);
+            text-align: center;
+            color: var(--navy);
+        }
+        /* Make Follow Me and Send a Gift boxes hug their content */
+        #social .section-title-box,
+        #gifts .section-title-box {
+            display: inline-flex;
+            padding: 0.35rem 0.8rem;
+            max-width: none;
+            width: auto;
+            margin: 0.5rem auto 1rem;
+        }
+        /* Ensure those inline boxes are centered within their containers */
+        #social .container, #gifts .container { text-align: center; }
+        #social .section-title-box, #gifts .section-title-box { justify-content: center; }
+
+        .section-title-box .section-subtitle {
+            font-size: 1.05rem;
+            margin: 0;
+            color: var(--navy);
+        }
+        .section-title-box h2 { margin: 0; }
+        .section-title-box .tour-dates p { margin: 0.1rem 0; }
+        .section-title-box .tour-note { margin: 0; font-style: italic; color: var(--text-light); }
         
         #home h1 {
             text-shadow: 0 0 30px rgba(1,42,68,0.32);
             color: var(--navy);
         }
+
+        /* Background image container for the hero (placed behind content) */
+        .hero-box {
+            background: rgba(255,255,255,0.20) !important; /* more translucent */
+            padding: 2rem 2.5rem;
+            border-radius: 12px;
+            max-width: 980px;
+            margin: 0 auto;
+            box-shadow: 0 12px 40px rgba(2,10,20,0.06);
+            backdrop-filter: blur(6px) saturate(1.02);
+            color: var(--navy);
+            text-align: center;
+            border: 1px solid rgba(2,10,20,0.04);
+        }
+
+        /* Ensure hero text inside the box is navy (override if needed) */
+        .hero-box h1, .hero-box p { color: var(--navy) !important; }
+
+        /* Background image container for the hero (placed behind content) */
+        .home-bg {
+            position: absolute;
+            inset: 0;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 0;
+            transition: opacity 0.8s ease-in-out;
+            opacity: 0;
+            filter: brightness(0.85) saturate(0.95);
+        }
+
+        /* Optional soft overlay to improve text contrast (reduced strength)
+           overlay sits between the background image and content */
+        .home-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.12));
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Ensure hero content sits above overlay/bg */
+        #home .container { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; }
+
+        /* Translucent panels for section content to improve readability */
+        #tour .rate-card,
+        #tour .addon-card,
+        #social .social-card,
+        #gifts .gifts-content,
+        #about .about-content,
+        #contact .contact-form {
+            background: rgba(255,255,255,0.20);
+            border: 1px solid rgba(2,10,20,0.06);
+            backdrop-filter: blur(6px) saturate(1.02);
+            color: var(--navy);
+        }
+
+        /* Slightly stronger panel for important cards */
+        #tour .rate-card, #tour .addon-card { padding: 1rem; border-radius: 12px; }
+
+        /* Dark text for the light translucent box */
+        #home h1 { color: var(--navy); text-shadow: 0 6px 18px rgba(255,255,255,0.6); }
+        #home p { color: var(--navy); opacity: 0.95; text-shadow: none; }
 
         /* Gallery Carousel */
         .gallery-carousel {
@@ -782,14 +903,21 @@
     </nav>
 
     <!-- Home Section -->
+    <!-- Visible debug banner (helps diagnose slideshow without DevTools) -->
+    <div id="heroDebug" style="position:fixed;left:12px;bottom:12px;z-index:9999;background:rgba(0,0,0,0.6);color:#fff;padding:8px 12px;border-radius:8px;font-size:13px;display:none;">hero debug</div>
+
     <section id="home">
         <div class="container">
-            <h1>Sweet Dreams, St. Louis</h1>
-            <p>Your sweetest escape is finally within reach.</p>
+            <div class="hero-box">
+                <h1>Sweet Dreams, St. Louis</h1>
+                <p>Your sweetest escape is finally within reach.</p>
+            </div>
         </div>
+        <!-- Background image container: will be populated by JS. -->
+        <div id="homeBg" class="home-bg" aria-hidden="true"></div>
+        <div class="home-overlay" aria-hidden="true"></div>
     </section>
 
-    <
 <!-- About Section -->
     <section id="about">
         <div class="container">
@@ -900,15 +1028,16 @@
 <!-- Tour Section -->
     <section id="tour">
         <div class="container">
-            <h2>Tour</h2>
-            <p class="tour-note">While I’m on tour in January, I am offering special, reduced rates, see the Tour Rates below for limited-time pricing.</p>
-            <div class="tour-dates">
-                <p>Memphis, TN — 1/6</p>
-                <p>Atlanta, GA — 1/7</p>
-                <p>Tampa, FL — 1/9 - 1/16</p>
+            <div class="section-title-box">
+                <h2>Tour</h2>
+                <p class="tour-note">While I’m on tour in January, I am offering special, reduced rates, see the Tour Rates below for limited-time pricing.</p>
+                <div class="tour-dates">
+                    <p>Memphis, TN — 1/6</p>
+                    <p>Atlanta, GA — 1/7</p>
+                    <p>Tampa, FL — 1/9 - 1/16</p>
+                </div>
+                <h3 class="section-subtitle">Tour Rates</h3>
             </div>
-
-            <h3 style="text-align:center; margin-top:1.5rem;">Tour Rates</h3>
             <div class="tour-rates">
                 <div class="rate-card">
                     <h3>The Ember (30 Minutes)</h3>
@@ -991,7 +1120,7 @@
     <!-- Social Media Section -->
     <section id="social" style="background: var(--bg-dark);">
         <div class="container">
-            <h2>Follow Me</h2>
+            <div class="section-title-box"><h2>Follow Me</h2></div>
             <div class="social-grid">
                 <div class="social-card">
                     <div class="social-icon">📷</div>
@@ -1043,7 +1172,7 @@
     <!-- Gifts Section -->
     <section id="gifts">
         <div class="container">
-            <h2>Send a Gift</h2>
+            <div class="section-title-box"><h2>Send a Gift</h2></div>
             <div class="gifts-content">
                 <p>Want to treat me? Send a gift through Cash App!</p>
                 <div class="cashapp-qr">
@@ -1360,6 +1489,109 @@
             initCarousel('ratesTrack', '.rates-prev', '.rates-next', 'ratesDots');
             initCarousel('addonsTrack', '.addons-prev', '.addons-next', 'addonsDots');
             initCarousel('fetishTrack', '.fetish-prev', '.fetish-next', 'fetishDots');
+        })();
+
+        /* Background slideshow for the hero (#home)
+           - The script tries a short list of numbered filenames inside `images/` (bg1..bg8)
+           - Replace or add filenames in `candidates` below or upload your images to `images/`.
+           - Default interval: 5000ms (5s). Change `intervalMs` if you want a different speed.
+        */
+        (function() {
+            const sectionIds = ['home','tour','social','gifts'];
+            const debugEl = document.getElementById('heroDebug');
+            if (debugEl) { debugEl.style.display = 'block'; debugEl.textContent = 'Slideshow: initializing...'; }
+
+            const intervalMs = 5000; // change to desired seconds * 1000
+
+            // Candidate image URLs — using the S3-hosted gallery images already in this HTML.
+            const candidates = [
+                'https://vatovaonline.s3.us-east-1.amazonaws.com/photo1.jpg',
+                'https://vatovaonline.s3.us-east-1.amazonaws.com/photo13.jpg',
+                'https://vatovaonline.s3.us-east-1.amazonaws.com/photo2.jpg',
+                'https://vatovaonline.s3.us-east-1.amazonaws.com/photo3.jpg',
+                'https://vatovaonline.s3.us-east-1.amazonaws.com/photo4.jpg',
+                'https://vatovaonline.s3.us-east-1.amazonaws.com/photo5.jpg',
+                'https://vatovaonline.s3.us-east-1.amazonaws.com/photo6.jpg',
+                'https://vatovaonline.s3.us-east-1.amazonaws.com/photo7.jpg',
+                'https://vatovaonline.s3.us-east-1.amazonaws.com/photo8.jpg',
+                'https://vatovaonline.s3.us-east-1.amazonaws.com/photo9.jpg',
+                'https://vatovaonline.s3.us-east-1.amazonaws.com/photo10.jpg'
+            ];
+
+            function preload(url) {
+                return new Promise(resolve => {
+                    const img = new Image();
+                    img.onload = () => resolve(url);
+                    img.onerror = () => resolve(null);
+                    img.src = url;
+                });
+            }
+
+            console.debug('Slideshow candidates:', candidates);
+            // create background & overlay elements for each named section
+            const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+            if (!sections.length) {
+                if (debugEl) debugEl.textContent = 'Slideshow: no target sections found';
+                return;
+            }
+
+            sections.forEach(section => {
+                // ensure the section itself is positioned so absolute bg/overlay fill it
+                section.style.position = 'relative';
+                section.style.overflow = 'hidden';
+                // content container should sit above overlays
+                const container = section.querySelector('.container') || section;
+                container.style.position = 'relative';
+                container.style.zIndex = 3;
+
+                // create bg and overlay if not present
+                if (!section.querySelector('.section-bg')) {
+                    const bg = document.createElement('div');
+                    bg.className = 'home-bg section-bg';
+                    bg.setAttribute('aria-hidden','true');
+                    section.insertBefore(bg, section.firstChild);
+                }
+                if (!section.querySelector('.home-overlay')) {
+                    const ov = document.createElement('div');
+                    ov.className = 'home-overlay';
+                    ov.setAttribute('aria-hidden','true');
+                    section.insertBefore(ov, section.firstChild.nextSibling);
+                }
+            });
+
+            // show first candidate immediately for all sections (but we'll replace later with only successful urls)
+            const bgEls = sections.map(s => s.querySelector('.section-bg'));
+            bgEls.forEach(el => { el.style.backgroundImage = `url("${candidates[0]}")`; el.style.opacity = 1; });
+            if (debugEl) debugEl.textContent = 'Slideshow: loading images...';
+
+            Promise.all(candidates.map(preload)).then(results => {
+                const backgrounds = results.filter(Boolean);
+                console.debug('Slideshow preloaded results:', results);
+                console.debug('Slideshow usable backgrounds:', backgrounds);
+                if (debugEl) debugEl.textContent = `Slideshow: ${backgrounds.length} images available`;
+
+                if (!backgrounds.length) {
+                    console.warn('No backgrounds preloaded successfully — keeping first candidate as fallback');
+                    return;
+                }
+
+                // start independent rotations per section
+                bgEls.forEach((el, idxBase) => {
+                    // use only successfully preloaded backgrounds
+                    const imgs = backgrounds.slice();
+                    let idx = 0;
+                    function show(i) {
+                        el.style.opacity = 0;
+                        setTimeout(() => { el.style.backgroundImage = `url("${imgs[i]}")`; el.style.opacity = 1; }, 220);
+                    }
+                    show(0);
+                    if (backgrounds.length > 1) {
+                        const timer = setInterval(() => { idx = (idx + 1) % backgrounds.length; show(idx); }, intervalMs);
+                        // expose for debugging per section
+                        el.__slideshowTimer = timer;
+                    }
+                });
+            }).catch(err => { console.error('Slideshow error:', err); if (debugEl) debugEl.textContent = 'Slideshow: error'; });
         })();
     </script>
 </body>
