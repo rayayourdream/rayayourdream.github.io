@@ -215,7 +215,7 @@
         }
         .section-title-box h2 { margin: 0; }
         .section-title-box .tour-dates p { margin: 0.1rem 0; }
-        .section-title-box .tour-note { margin: 0; font-style: italic; color: var(--navy); }
+        .section-title-box .tour-note { margin: 0; font-style: italic; color: var(--navy); font-weight: 700; }
         
         #home h1 {
             text-shadow: 0 0 30px rgba(1,42,68,0.32);
@@ -279,7 +279,7 @@
         }
 
         /* Ensure individual text inside gifts content is readable like the tour note */
-        #gifts .gifts-content, #gifts .gifts-content p { color: var(--navy); }
+        #gifts .gifts-content, #gifts .gifts-content p { color: var(--navy); font-weight: 700; }
 
         /* Slightly stronger panel for important cards */
         #tour .rate-card, #tour .addon-card { padding: 1rem; border-radius: 12px; }
@@ -715,7 +715,7 @@
         .tour-dates { text-align: center; font-weight: 600; color: var(--text-dark); }
         .tour-dates p { margin: 0.25rem 0; }
         :root { --tour-card-w: 300px; --tour-gap: 0.75rem; }
-        .tour-note { text-align: center; color: var(--navy); font-size: 1rem; margin-top: 0.5rem; margin-bottom: 1.25rem; font-style: italic; }
+        .tour-note { text-align: center; color: var(--navy); font-size: 1rem; margin-top: 0.5rem; margin-bottom: 1.25rem; font-style: italic; font-weight: 700; }
         /* Use a 3-column grid to match the regular rates layout */
         .tour-rates, .tour-addons {
             display: grid;
@@ -1036,8 +1036,9 @@
                 <p class="tour-note">While I’m on tour in January, I am offering special, reduced rates, see the Tour Rates below for limited-time pricing.</p>
                 <div class="tour-dates">
                     <p>Nashville, TN — 1/6</p>
-                    <p>Atlanta, GA — 1/7</p>
+                    
                     <p>Tampa, FL — 1/9 - 1/16</p>
+                    <p>Nashville, TN - 1/17</p>
                 </div>
                 <h3 class="section-subtitle">Tour Rates</h3>
             </div>
@@ -1150,6 +1151,10 @@
     <section id="contact" style="background: var(--bg-dark);">
         <div class="container">
             <h2>Contact Me</h2>
+            <div class="contact-info" style="margin-bottom:1rem; text-align:center; color:var(--text-light);">
+                <p style="margin:0.25rem 0;"><strong>Phone:</strong> <a href="tel:6183289720" style="color:var(--gold-500); text-decoration:none;">(618) 328-9720</a></p>
+                <p style="margin:0.25rem 0;"><strong>Email:</strong> <a href="mailto:reachraya@proton.me" style="color:var(--gold-500); text-decoration:none;">reachraya@proton.me</a></p>
+            </div>
             <form class="contact-form" id="contactForm">
                 <div class="form-group">
                     <label for="name">Name</label>
